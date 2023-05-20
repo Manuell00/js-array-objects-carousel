@@ -3,15 +3,23 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow: auto;
+}
+
+body{
+    height: 100vh;
+    background-color: silver;
 }
 
 #container {
     background-color: silver;
+    height: 100%;
 }
 
 #main-row {
     position: relative;
-    height: 100vh;
+    background-color: silver;
+    height: 100%;
 }
 
 /* Inserisco lo stile del container con bottoni e img grande */
