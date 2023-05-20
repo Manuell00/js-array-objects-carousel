@@ -131,7 +131,7 @@ buttonUp.addEventListener("click",
         miniatura[activeItem].classList.add("active")
         miniatura[activeItem].classList.remove("opacityYes")
 
-       // Incollo l'immagine a imgContainer e la frase a phraseContainer
+        // Incollo l'immagine a imgContainer e la frase a phraseContainer
         imgContainer.innerHTML = (coppie[0])
         phraseContainer.innerHTML = (coppie[1])
     }
