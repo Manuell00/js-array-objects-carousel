@@ -32,33 +32,35 @@
 }
 
 #imgContainer img{
-    max-width: 100%;
+    width: 100%;
     max-height: 100%;
     object-fit: cover;
     z-index:100
 }
 
-#leftButton{
+#bottomButton{
     position: absolute;
-    transform: translate(0%, -50%);
-    left: 0;
-    top: 50%;
+    transform: translate(-50%, 0%);
+    left: 50%;
+    top: 0;
     z-index: 100;
 }
 
-#rightButton{
+#topButton{
     position: absolute;
-    transform: translate(0%, -50%);
-    right: 0;
-    top: 50%;
+    transform: translate(50%, 0%);
+    right: 50%;
+    bottom: 0;
     z-index: 200;
 }
 
 #phraseContainer{
     position: absolute;
-    bottom: 50px;
-    right: 20px;
+    bottom: 0px;
+    right: 0px;
+    padding: 10px;
     z-index: 200;
+    background-color:steelblue;
     color: white;
     font-weight: 500;
     text-align: right;

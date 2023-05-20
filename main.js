@@ -29,7 +29,7 @@
 const images = [
     {
         image: 'img/01.webp',
-        title: 'Marvels Spiderman Miles Morale',
+        title: 'Marvels Spiderman Miles Morales',
         text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.',
     }, {
         image: 'img/02.webp',
@@ -52,36 +52,121 @@ const images = [
 
 
 // Setto le VARIABILI
+const imgButtonContainer = document.getElementById("imgButtonContainer")
 const imgContainer = document.getElementById("imgContainer")
 const phraseContainer = document.getElementById("phraseContainer")
+const schedaFrase = []
 
 let immagine = images.forEach(element => {
 
     // Destructuring
-    let {image, title, text} = element ;
+    let { image, title, text } = element;
 
+    // Creo le schede pcon l'immagine
     let scheda = `<!--Inserisco la scheda -->
     <div id="imgContainer">
         <!-- Inserisco l'immagine -->
         <img src="${image}" alt="${image}">
     </div>`
 
+    // Creo le schede con le relative frasi
     let frasi = ` <!-- Inserisco la parte testuale -->
     <div class="text">
         <h3 class="subtitle">${title}</h3>
         <p class="text">${text}</p>
     </div>`
 
+    // Inserisco le immagini nel thumbnails
+    let immagine = `<div class="thumbnailsImg opacityYes"> <img src="${image}" alt="${image}"></div>`
+    thumbnailsContainer.innerHTML += immagine
 
-    imgContainer.innerHTML = scheda
-    phraseContainer.innerHTML = frasi
+    // Creo dei mini array che inserisco a loro volta in un array più grande
+    let coppia = []
+    coppia.push(scheda, frasi)
+    schedaFrase.push(coppia)
 });
 
+let activeItem = 0;
+
+// Definisco la nodelist di classi di thumbnailsImg
+const miniatura = document.querySelectorAll(".thumbnailsImg")
+miniatura[activeItem].classList.add("active")
+miniatura[activeItem].classList.remove("opacityYes")
+
+// Definisco delle nuove variabili
+let coppie = schedaFrase[activeItem]
+const buttonUp = document.getElementById("topButton")
+const buttonDown = document.getElementById("bottomButton")
 
 
-// Inserisco all'interno della schedaContainer tutte le schede e gli affido una classe per renderle non visibili.
+// Inserisco nel imgContainer l'immagine e la frase con activeItem = 0
+imgContainer.innerHTML += (coppie[0])
+phraseContainer.innerHTML += (coppie[1])
+console.log(imgButtonContainer);
 
-// La prima immagine dovrà avere una classe che la renda active
 
-// Successivamente al click dei bottoni la classe active verrà rimossa e verrà assegnata "temporaneamente" alla scheda successiva
+
+// Gestisco l'evento sul click sul NEXT
+buttonUp.addEventListener("click",
+    function () {
+
+        // Definisco la variabile immagine
+        let coppie = schedaFrase[activeItem + 1]
+
+        // Rimuovo la classe activeItem dall'elemento
+        miniatura[activeItem].classList.remove("active")
+        miniatura[activeItem].classList.add("opacityYes")
+
+        // Se non sono all'ultimo elemento
+        if (activeItem == schedaFrase.length - 1) {
+            activeItem = 0
+            coppie = schedaFrase[activeItem]
+        }
+
+        else {
+            activeItem++
+        }
+
+        // Aggiungo la classe activeItem all'elemento
+        miniatura[activeItem].classList.add("active")
+        miniatura[activeItem].classList.remove("opacityYes")
+
+       // Incollo l'immagine a imgContainer e la frase a phraseContainer
+        imgContainer.innerHTML = (coppie[0])
+        phraseContainer.innerHTML = (coppie[1])
+    }
+)
+
+
+
+// Gestisco l'evento sul click sul BEFORE
+buttonDown.addEventListener("click",
+    function () {
+
+        // Definisco la variabile immagine
+        let coppie = schedaFrase[activeItem - 1]
+
+        // Rimuovo la classe activeItem dall'elemento
+        miniatura[activeItem].classList.remove("active")
+        miniatura[activeItem].classList.add("opacityYes")
+
+        // Se non sono al primo elemento
+        if (activeItem == 0) {
+            activeItem = schedaFrase.length - 1
+            coppie = schedaFrase[activeItem]
+        }
+
+        else {
+            activeItem--
+        }
+
+        // Aggiungo la classe activeItem all'elemento
+        miniatura[activeItem].classList.add("active")
+        miniatura[activeItem].classList.remove("opacityYes")
+
+        // Incollo l'immagine a imgContainer e la frase a phraseContainer
+        imgContainer.innerHTML = (coppie[0])
+        phraseContainer.innerHTML = (coppie[1])
+    }
+)
 
